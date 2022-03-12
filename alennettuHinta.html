@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alennettu hinta</title>
+<!-- 
+Tee ohjelma, joka laskee tuotteen alennetun hinnan. Ohjelma kysyy tuotteen alentamattoman 
+hinnan sekä alennusprosentin. Ohjelma kertoo tuotteen alennetun hinnan. 
+Alennettu hinta lasketaan: hinta * (100.0 - alennusprosentti) / 100.0. 
+ -->
+</head>
+<!-- style-elementin avulla muotoillaan lomakekentät alkamaan samasta kohtaa -->
+<style type="text/css">
+    label {
+        display: block;
+        width: 5em;
+        float: left;
+    }
+</style>
+
+<body>
+    <h3>Alennettu hinta</h3>
+
+    <form>
+        <p>
+            <label>Hinta:</label>
+            <input type="text" id="hinta" size="6">
+        </p>
+        <p>
+            <label>Alennus:</label>
+            <input type="text" id="alennusprosentti" size="3"> %
+        </p>
+        <p>
+		   <!-- Kun painiketta painetaan, kutsutaan funktiota laskeAlennettu, joka on alkaen rivillä 43 -->
+            <input type="button" value="Laske" onclick="laskeAlennettu()">
+        </p>
+    </form>
+
+    <!-- Tänne kirjoitetaan vastaus JavaScriptillä -->
+    <div id="vastaus"></div>
+
+    <script type="text/javascript">
+        function laskeAlennettu() {
+            // Lomakekentän hinta arvo 
+            var hinta = document.getElementById("hinta").value;
+
+            // Lomakekentän alennusprosentti arvo
+            var alennusprosentti = document.getElementById("alennusprosentti").value;
+
+            // Lasketaan alennettu hinta
+            var alennettu = hinta * (100.0 - alennusprosentti) / 100.0;
+console.log(alennettu);
+            // Kirjoitetaan vastaus html-sivulla elementtiin, jonka id:n arvo on palkkio
+            // Vastaus kirjoitetaan kahdella desimaalilla
+            document.getElementById("vastaus").innerHTML = "<p>Alennettu hinta on " +
+                alennettu.toFixed(2) + "</p>";
+        }
+    </script>
+</body>
+
+</html>

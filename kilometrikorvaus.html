@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kilometrikorvaus</title>
+<!-- 
+Ohjelma kysyy ajetut kilometrit, laskee ja näyttää korvauksen määrän.
+Kilometrikorvaus on 0.42 euroa/kilometri. Vastaus muotoillaan kahdella desimaalilla.
+ -->
+</head>
+<body>
+	<h3>Kilometrikorvaus</h3>
+
+	<form>
+		<label>Kilometrit:</label> 
+		<!-- Lomakekenttä, jonka arvo luetaan JavaScriptissä rivillä 29 -->
+		<input type="text" id="matka" size="3">
+
+		<!-- Kun painiketta painetaan, suoritetaan laskeKorvaus funktio -->
+		<input type="button" value="Laske" onclick="laskeKorvaus()">
+	</form>
+
+	<!-- Vastaus kirjoitetaan alla olevaan elementtiin JavaScriptillä -->
+	<div id="vastaus"></div>
+
+	<script type="text/javascript">
+		function laskeKorvaus() {
+			// Lomakekentän matka arvo riviltä 17 otetaan JavaScript muuttujaan kilometrit
+			var kilometrit = document.getElementById("matka").value;
+
+			// Lasketaan korvaus, desimaaliluvussa on piste ieikä pilkku
+			var korvaus = kilometrit * 0.42;
+
+			// Kirjoitetaan vastaus html-sivun elementtiin, jonka id:n arvo on maksetaan
+			// toFixed-metodi muotoilee luvun
+			// + liittää yhteen merkkijonoja ja muuttujia. Vakiona näkyvä merkkijono on lainausmerkeissä
+			document.getElementById("vastaus").innerHTML = "<p>Maksetaan " +
+					korvaus.toFixed(2) + " euroa</p>";
+		}
+	</script>
+</body>
+</html>
