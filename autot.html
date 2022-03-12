@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Autot</title>
+<!-- 
+Ohjelmalla listataan valmiiksi annetusta taulukosta autot 
+sekä kerrotaan, montako kertaa tietty auto on taulukossa 
+ja lisätään uusi auto taulukkoon. 
+ -->
+</head>
+<body>
+	<h3>Autot</h3>
+
+	<div id="listaus"></div>
+
+	<form>
+		<label>Etsittävä auto:</label> 
+		<input type="text" id="etsittava" size="10"> 
+		<input type="button" value="Etsi" onclick="etsi()">
+	</form>
+
+	<div id="vastaus"></div>
+
+	<form>
+		<label>Lisää auto:</label> 
+		<input type="text" id="lisattava" size="10"> 
+		<input type="button" value="Lisää" onclick="lisaa()">
+	</form>
+
+	<script type="text/javascript">
+		// Esitellään taulukko, jossa on valmiina automerkit, taulukko on globaali
+		// Jos taulukko esitellään funktioon, se katoaa joka kerta funktion lopussa eli tiedot eivät säily
+		var autot = ["Nissan", "Opel", "Peugeot", "Renault", "Audi",
+				"Volvo", "Opel", "Audi"];
+
+		// Listataan heti sivulle autot
+		listaa();
+
+		// funktio listaa taulukon sisällön
+		function listaa() {
+			var teksti = "";
+
+			// Käydään taulukko läpi ja kootaan taulukossa olevat arvot teksti-muuttujaan
+			// Tarkasta, että length on kirjoitettu oikein omassa koodissasi
+			for (var i = 0; i < autot.length; i++) {
+				teksti = teksti + autot[i] + "<br>";
+			}
+
+			// Vastauksen kirjoittaminen html-sivulle
+			document.getElementById("listaus").innerHTML = "<p>" + teksti + "</p>";
+		}
+
+		// funktio laskee halutun automerkin määrän taulukossa
+		function etsi() {
+			// Lomakekentän arvo
+			var etsittava = document.getElementById("etsittava").value;
+			var maara = 0; // Kertoo, montako etsittyjä autoja oli
+
+			// Käydään taulukko läpi 
+			for (i = 0; i < autot.length; i++) {
+				// Jos taulukossa oleva arvo on sama kuin lomakekentän arvo
+				if (autot[i] == etsittava) {
+					maara = maara + 1; // Kasvatetaan maara-muuttujaa yhdellä
+				}
+			}
+
+			// Vastauksen kirjoittaminen html-sivulle
+			document.getElementById("vastaus").innerHTML = "<p>Autoa " +
+					etsittava + " oli " + maara + " kappaletta</p>";
+		}
+
+		// funktio lisää uuden automerkin taulukoon
+		function lisaa() {
+			var lisattava = document.getElementById("lisattava").value;
+			var paikka = autot.length;
+			autot[paikka] = lisattava;
+			// tai
+			//autot.push(lisattava);
+
+			// Päivitetään listaus html sivulle
+			listaa();
+		}
+	</script>
+
+</body>
+</html>

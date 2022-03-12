@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Palkinnon arvonta</title>
+<!--
+Onnistuneen mökkireissun päätteeksi halutaan arpoa mökillä olijoiden
+kesken palkinto. Tee ohjelma, mikä kysyy kunkin nimen ja arpoo voittajan.
+ -->
+</head>
+<body>
+	<h3>Palkinnon arvonta</h3>
+
+	<form>
+			<label>Nimi:</label>
+			<input type="text" id="nimi" size="15">
+			<input type="button" value="Lisää" onclick="lisaaNimi()">
+			<input type="button" value="Arvo" onclick="arvoVoittaja()">
+	</form>
+	<!-- Tänne kirjoitetaan nimet -->
+	<div id="listaus"></div>
+
+	<!-- Tänne kirjoitetaan arvonnan tulos -->
+	<div id="vastaus"></div>
+
+	<script type="text/javascript">
+		//  Taulukko on globaali, koska tarvitaan kahdessa funktiossa
+		var nimet = [];
+
+		function lisaaNimi() {
+			// Lisätään lomakkeelle annettu nimi taulukkoon
+			var paikka = nimet.length;
+			nimet[paikka] = document.getElementById("nimi").value;
+
+			// Muuttuja, mihin kootaan taulukossa olevat nimet
+			var teksti = "";
+
+			// Käydään taulukko läpi kooten siellä olevat nimet teksti-muuttujaan
+			for (var i = 0; i < nimet.length; i++) {
+				teksti = teksti + " " + nimet[i];
+			}
+
+			// Laitetaan annetut nimet sivulle
+			document.getElementById("listaus").innerHTML = "<p>Annetut nimet: " +
+					teksti + "</p>";
+
+			// Tyhjennetään tekstikenttä
+			document.getElementById("nimi").value = "";
+
+			// Tyhjennetään arvonnan tulos
+			document.getElementById("vastaus").innerHTML = "<p> </p>";
+		}
+
+		function arvoVoittaja() {
+			// Arvotaan voittajan paikkanumero
+			var voittaja = Math.floor((Math.random() * nimet.length));
+			var nimi = nimet[voittaja];
+
+			// Vastauksen kirjoittaminen html-sivulle
+			document.getElementById("vastaus").innerHTML = "<p>Voittaja on " +
+					nimi + "</p>";
+
+		}
+	</script>
+</body>
+</html>
